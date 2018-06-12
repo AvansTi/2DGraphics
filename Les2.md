@@ -1,4 +1,8 @@
-﻿# Week 2
+﻿---
+layout: default
+title: Week 1
+---
+# Week 2
 
 <!-- TOC -->
 

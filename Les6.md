@@ -1,3 +1,7 @@
+---
+layout: default
+title: Week 6
+---
 # Flappy Bird
 
 ## Introductie

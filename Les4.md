@@ -1,3 +1,7 @@
+---
+layout: default
+title: Week 4
+---
 # Verlet Particles
 
 ![verlet](les4/verlet.gif?right)Vorige les is aan bod geweest hoe Java2D gebruikt kan worden om te animeren. Een ArrayList kan gebruikt worden om punten op te slaan, de zogenaamde particles, om animaties en speciale effecten te maken.

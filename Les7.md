@@ -1,3 +1,7 @@
+---
+layout: default
+title: Week 7
+---
 # Platformer game
 
 ## Achtergrond inladen

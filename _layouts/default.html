@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="highlighter.css">
+    <style>
+        blockquote
+        {
+            margin-left: 25px;
+            background-color: #fefefe;
+            border-left: 10px solid #ddd;
+            padding-left: 25px;
+        }
+
+        blockquote.exercises
+        {
+          border-left: 0;
+          background-color: #c6002a;
+          border-radius: 10px;
+          margin: 0px;
+          padding-right: 10px; 
+          margin-top: 10px;
+          margin-bottom: 10px; 
+        }
+        blockquote.exercise
+        {
+          border-left: 0;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-left: 0px; 
+          padding-left: 0px;
+          color: white;
+          border-bottom: 1px solid white;
+          margin-top: 25px;
+          margin-bottom: 25px;
+          background-color: transparent;
+        }
+        blockquote.exercise:last-child
+        {
+          border: none !important;
+        }
+        blockquote.exercise h3
+        {
+          padding: 5px;
+          cursor: pointer;
+        }
+        blockquote.exercise>:not(h3)
+        {
+          display: none;
+        }
+
+        blockquote.exercise .highlighter-rouge
+        {
+          color: #00ACEB
+        }
+
+        blockquote.exercises p
+        {
+          color: white;
+          padding-bottom: 10px;
+        }
+
+        .highlight
+        {
+          margin: 0px;
+        }
+
+        .language-java
+        {
+          border-radius: 10px;
+          border: 1px solid #181712;
+          padding: 10px;
+          background-color: white;
+          margin-bottom: 16px;
+        }
+        .language-output
+        {
+          border-radius: 10px;
+          border: 1px solid #eee;
+          background-color: #181712;
+          color: white;
+          display: block;
+          padding: 10px;
+          margin-bottom: 16px;
+        }
+
+ 
+        h2{ margin-bottom: 20px;}
+        h3{ margin-bottom: 20px;}
+        hr{ margin-bottom: 150px; margin-top: 20px; }
+
+        img[src$="right"] {
+            display:block;
+            float: right;
+            margin-left: 25px;
+          }
+
+        img[src$="left"] {
+            display:block;
+            float: left;
+            margin-right: 25px;
+          }
+          img[src*="thumb"] {
+          width: 150px;
+          height: auto;
+        }
+        img[src*="thumbmedium"] {
+          width: 300px;
+          height: auto;
+        }
+        h1,h2,h3 { clear: both;}
+
+        .nav-pills, .dropdown-menu
+        {
+          background-color: #c6002a;
+        }
+        .nav-pills a
+        {
+          color: white;
+        }
+        .nav-pills .nav-link.active, .nav-pills .show>.nav-link
+        {
+          background-color: #c6002a;
+          color: #00ACEB;
+        }
+
+        .tip
+        {
+          margin-left: 0px;
+          padding-left: 105px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          border: 0;
+          background-color: #c6002a;
+          display: block;
+          min-height: 120px;
+          color: white;
+          border-radius: 10px;
+        }
+        .tip::before {
+          content:url(images/tip.png);
+          float: left;
+          margin-left: -100px;
+        }​
+
+        kbd, .key {
+          display: inline;
+          display: inline-block;
+          min-width: 1em;
+          padding: .2em .3em;
+          font: normal .85em/1 "Lucida Grande", Lucida, Arial, sans-serif;
+          text-align: center;
+          text-decoration: none;
+          -moz-border-radius: .3em;
+          -webkit-border-radius: .3em;
+          border-radius: .3em;
+          border: none;
+          cursor: default;
+          -moz-user-select: none;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+        kbd[title], .key[title] {
+          cursor: help;
+        }
+
+        /* Dark style for display on light background. This is the default style. */
+        kbd, kbd.dark, .dark-keys kbd, .key, .key.dark, .dark-keys .key {
+          background: rgb(80, 80, 80);
+          background: -moz-linear-gradient(top, rgb(60, 60, 60), rgb(80, 80, 80));
+          background: -webkit-gradient(linear, left top, left bottom, from(rgb(60, 60, 60)), to(rgb(80, 80, 80)));
+          color: rgb(250, 250, 250);
+          text-shadow: -1px -1px 0 rgb(70, 70, 70);
+          -moz-box-shadow: inset 0 0 1px rgb(150, 150, 150), inset 0 -.05em .4em rgb(80, 80, 80), 0 .1em 0 rgb(30, 30, 30), 0 .1em .1em rgba(0, 0, 0, .3);
+          -webkit-box-shadow: inset 0 0 1px rgb(150, 150, 150), inset 0 -.05em .4em rgb(80, 80, 80), 0 .1em 0 rgb(30, 30, 30), 0 .1em .1em rgba(0, 0, 0, .3);
+          box-shadow: inset 0 0 1px rgb(150, 150, 150), inset 0 -.05em .4em rgb(80, 80, 80), 0 .1em 0 rgb(30, 30, 30), 0 .1em .1em rgba(0, 0, 0, .3);
+        }
+
+        /* Light style for display on dark background. */
+        kbd.light, .light-keys kbd, .key.light, .light-keys .key {
+          background: rgb(250, 250, 250);
+          background: -moz-linear-gradient(top, rgb(210, 210, 210), rgb(255, 255, 255));
+          background: -webkit-gradient(linear, left top, left bottom, from(rgb(210, 210, 210)), to(rgb(255, 255, 255)));
+          color:  rgb(50, 50, 50);
+          text-shadow: 0 0 2px rgb(255, 255, 255);
+          -moz-box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+          -webkit-box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+          box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+        }
+
+    </style>
+    <title>{{ page.title }}</title>
+  </head>
+  <body>
+        <ul class="nav nav-pills nav-fill">
+          <li class="nav-item">
+            <a class="nav-link {% if page.title == "Week 1" %} active{% endif %}" href="Les1">Week 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page.title == "Week 2" %} active{% endif %}" href="Les2">Week 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page.title == "Week 3" %} active{% endif %}" href="Les3">Week 3</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page.title == "Week 4" %} active{% endif %}" href="Les4">Week 4</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page.title == "Week 5" %} active{% endif %}" href="Les5">Week 5</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page.title == "Week 6" %} active{% endif %}" href="Les6">Week 6</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page.title == "Week 7" %} active{% endif %}" href="Les7">Week 7</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page.title == "Eindopdracht" %} active{% endif %}" href="Eindopdracht">Eindopdracht</a>
+          </li>
+        </ul>
+      <div class="container">
+      {{ content }}
+      </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script>
+      $(function()
+      {
+        //make exercise clickable
+        $("blockquote.exercise h3").click(function(){
+          $(this).siblings().toggle(100);
+        });
+
+        //replace ~~stuff~~ in output code blocks with red text
+        $("code.language-output").each(function(index, element)
+        {
+          var text = $(this).text();
+          text = text.replace(/\~\~([^\~]+)\~\~/g, "<span style='color: red'>$1</span>");
+          $(this).html(text);
+        });
+        //change output formatting (can't do this with css)
+        $("code.language-output").each(function(index, element)
+        {
+          $(this).removeClass("language-output");
+          $(this).parent().addClass("language-output");
+        });
+
+        //add tryme button
+        $("div.tryme").each(function(index, element)
+        {
+           var text = $(this).text();
+           var btn = $('<a class="btn btn-primary" href="#" style="float: right; margin-top: -10px; margin-right: -10px;">Try Me</a>');
+           $(this).prepend(btn);
+            btn.click(function()
+            {
+                alert("Here should be an online IDE with\n" + text);
+            });
+        });
+        //bootstrap tables
+        $("table").each((index, element) =>
+        {
+          element.className = "table table-triped";
+        });
+
+        //add tryme button
+        $("div.language-java").each(function(index, element)
+        {
+           var text = $(this).text();
+           var btn = $('<a class="btn btn-primary" href="" style="float: right; margin-top: -10px; margin-right: -10px; margin-left: 15px;">Copy</a>');
+           $(this).prepend(btn);
+            btn.click(function()
+            {
+              btn.removeClass("btn-primary");
+              btn.addClass("btn-success");
+              setTimeout(function()
+              {
+                btn.removeClass("btn-success");
+                btn.addClass("btn-primary");
+              }, 500);
+              var $temp = $("<textarea>");
+              $("body").append($temp);
+              $temp.val(text).select();
+              document.execCommand("copy");
+              $temp.remove();
+              return false;
+            });
+        });
+
+
+      });
+    
+
+      
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120620020-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-120620020-1');
+    </script>
+
+  </body>
+</html>
