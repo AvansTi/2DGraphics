@@ -4,17 +4,12 @@ Dit is een lessenpakket over Java2D. Deze documentatie is beschikbaar op [github
 
 ## lessen
 
-- [Les 1 - Java2D, Lijnen, Kleuren, Basistransformaties](Les1)
-  - [Opgaven](Les1#opgaven)
-- [Les 2 - Shapes, Paths, Areas, Strokes, Paints, Transformaties en interacties](Les2)
-  - [Opgaven](Les2#opgaven)
-- [Les 3 - Tekst, Images, Blending, Clipping, Animeren](Les3)
-  - [Opgaven](Les3#opgaven)
-- [Les 4 - Verlet particles](Les4)
-  - [Opgaven](Les4#opgaven)
-- [Les 5 - Box2D Physics Engine](Les5)
-  - [Opgaven](Les5#opgaven)
-- [Les 6 - Flappy Bird](Les6)
-- [Les 7 - Platformer game](Les7)
+- [Les 1 - Java2D, Lijnen, Kleuren, Basistransformaties](week1)
+- [Les 2 - Shapes, Paths, Areas, Strokes, Paints, Transformaties en interacties](week2)
+- [Les 3 - Tekst, Images, Blending, Clipping, Animeren](week3)
+- [Les 4 - Verlet particles](week4)
+- [Les 5 - Box2D Physics Engine](week5)
+- [Les 6 - Flappy Bird](week6)
+- [Les 7 - Platformer game](week7)
 
 [Eindopdracht](Eindopdracht)
