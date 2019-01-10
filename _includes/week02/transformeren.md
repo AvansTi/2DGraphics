@@ -142,6 +142,6 @@ cameraTransform.inverseTransform(mousePosition, mousePosition);
 
 Door nu de positie van de muis op te vragen (zie [Muisinteractie](#Muisinteractie)), kan gemakkelijk berekend worden welk object aangeklikt is, in combinatie met de transformatie van de camera.
 
-{% include week02/exercise/05-piegel.md %}
+{% include week02/exercise/05-spiegel.md %}
 {: .exercises }
 
