@@ -2,9 +2,12 @@
 layout: default
 title: Week 4
 ---
+# Week 4
+{% include_relative /licence.md %}
+---
 # Verlet Particles
 
-![verlet](les4/verlet.gif?right)Vorige les is aan bod geweest hoe Java2D gebruikt kan worden om te animeren. Een ArrayList kan gebruikt worden om punten op te slaan, de zogenaamde particles, om animaties en speciale effecten te maken.
+![verlet](images/week04/verlet.gif?right)Vorige les is aan bod geweest hoe Java2D gebruikt kan worden om te animeren. Een ArrayList kan gebruikt worden om punten op te slaan, de zogenaamde particles, om animaties en speciale effecten te maken.
 
 Om een bewegend punt op te slaan, kan dit gemodelleerd worden met een locatie, snelheid en versnelling. Om dit punt een tijdstap verder te zetten, kan de volgende code gebruikt worden:
 
@@ -121,7 +124,7 @@ Let hierbij op dat de positie eerst opgeslagen wordt voordat deze veranderd word
 
 ## Constraints
 
-![constraint](les4/bridge.jpg)
+![constraint](images/week04/bridge.jpg)
  Door nu code toe te voegen om de punten te beïnvloeden kunnen bepaalde effecten gecreëerd worden. Twee voorbeelden van dit soort invloeden zijn het vastzetten van een punt op een vaste locatie en het op een vaste afstand te houden van twee punten. Deze twee beperkingen kunnen samengevat worden in een Constraint, waar subklassen van gemaakt worden die constraints voorstellen.
 
 ```java
@@ -157,7 +160,7 @@ public class StaticConstraint extends Constraint {
 
 De satisfy methode zal de particle op een vaste plek zetten. Door deze nu aan te roepen nadat alle particles geupdate zijn, blijft de particle op de juiste plek staan. 
 
-![constraint](les4/constraint_particle.png?right)Een ander soort constraint is een vaste-afstand constraint. Deze constraint zorgt ervoor dat twee punten altijd op dezelfde afstand blijven. Als punten te ver van elkaar vandaan staan, worden ze naar elkaar toe verplaatst en wanneer ze te dicht op elkaar staan worden ze naar buiten verplaatst. Door een vaste afstand in te stellen en de echte afstand te berekenen, kan het verschil hiertussen berekend worden. Hierna kan je de verschilvector van de twee punten nemen, deze normaliseren en de helft van het verschil met deze vector vermenigvuldigen, en dit bij het ene punt optellen, en van het andere punt afhalen.
+![constraint](images/week04/constraint_particle.png?right)Een ander soort constraint is een vaste-afstand constraint. Deze constraint zorgt ervoor dat twee punten altijd op dezelfde afstand blijven. Als punten te ver van elkaar vandaan staan, worden ze naar elkaar toe verplaatst en wanneer ze te dicht op elkaar staan worden ze naar buiten verplaatst. Door een vaste afstand in te stellen en de echte afstand te berekenen, kan het verschil hiertussen berekend worden. Hierna kan je de verschilvector van de twee punten nemen, deze normaliseren en de helft van het verschil met deze vector vermenigvuldigen, en dit bij het ene punt optellen, en van het andere punt afhalen.
 
 In de afbeelding hiernaast: bekend is punt A en B, dit zijn de posities van de twee particles in de constraint. De bedoeling na de update is om deze op posities C en D zetten. Om A op positie C te zetten, moet eerst de vector AC berekend worden.
 
@@ -225,17 +228,17 @@ Wat opvalt is dat de afstand tussen A en B met iedere iteratie dichter bij 100 k
 
 ### Doeksimulatie
 
-![cloth](les4/cloth.gif)
+![cloth](images/week04/cloth.gif)
 
 ### Blob Physics
 
-![blob](les4/massspring_blob.png?right)![blob](les4/blob.gif)
+![blob](images/week04/massspring_blob.png?right)![blob](images/week04/blob.gif)
 
 Een blob is te modelleren als een centrum met een buitenkant.
 
 ### Bridgebuilder
 
-![bridge](les4/bridge2.png)
+![bridge](images/week04/bridge2.png)
 
 ## Opdrachten
 
@@ -256,3 +259,13 @@ Een blob is te modelleren als een centrum met een buitenkant.
 5. Voeg de mogelijkheid toe om een doek toe te voegen.
 
 6. Zorg ervoor dat de scene opgeslagen en ingeladen kan worden.
+
+---
+
+# Eindopdracht week 4
+
+{% include week02/exercise/06-blockdrag.md %}
+{: .exercises }
+
+
+Einde van week 4

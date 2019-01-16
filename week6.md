@@ -2,11 +2,12 @@
 layout: default
 title: Week 6
 ---
-# Flappy Bird
-
+# Week 6
+{% include_relative /licence.md %}
+---
 ## Introductie
 
-![FlappyBird](les6/flappybird.gif)
+![FlappyBird](images/week06/flappybird.gif)
 
 We gaan deze week een Flappy bird kloon maken. Flappy bird is een simpele game met een vogeltje dat door een stel buizen vliegt. Indien het vogeltje ergens tegenaan botst stopt het spel en moet de speler opnieuw beginnen. Het programmeren gaan we in een aantal losse onderdelen doen
 
@@ -17,7 +18,7 @@ We gaan deze week een Flappy bird kloon maken. Flappy bird is een simpele game m
 
 ## Inladen afbeeldingen en tekenen achtergrond
 
-[![spritesheet](les6/spritesheet.png?thumbright)](les6/spritesheet.png))Voor flappy bird is het mogelijk een spritesheet te downloaden. Deze spritesheet bevat een flink aantal losse afbeeldingen, waar we een aantal van gaan gebruiken. We kunnen deze afbeeldingen uitknippen door de coördinaten op te zoeken in een imagetool, waar de volgende subafbeeldingen uit komen:
+[![spritesheet](images/week06/spritesheet.png?thumbright)](images/week06/spritesheet.png))Voor flappy bird is het mogelijk een spritesheet te downloaden. Deze spritesheet bevat een flink aantal losse afbeeldingen, waar we een aantal van gaan gebruiken. We kunnen deze afbeeldingen uitknippen door de coördinaten op te zoeken in een imagetool, waar de volgende subafbeeldingen uit komen:
 
 ```java
 BufferedImage total = ImageIO.read(getClass().getResource("/spritesheet.png"));
@@ -130,3 +131,7 @@ De afbeeldingen van de pijpen worden nu boven en onder de opgegeven posities get
 
 ## Collision
 
+
+---
+
+Einde van week 7

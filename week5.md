@@ -2,15 +2,19 @@
 layout: default
 title: Week 5
 ---
+# Week 5
+{% include_relative /licence.md %}
+---
+
 # Physics Engine
 
-![physics](les5/wreck.gif?right) Om een interactieve wereld te maken met objecten die reageren zoals in de werkelijke wereld moeten we dit uitprogrammeren, maar er kan ook gebruik gemaakt worden van een bestaande physics engine. Een voorbeeld van een bekende 2D physics engine is [Box2D](http://www.box2d.org), gebruikt in onder andere Angry Birds. Deze engine is echter geschreven in C++ en kunnen we niet gemakkelijk binnen java gebruiken. Gelukkig zijn er ook engines beschikbaar voor java, zoals [dyn4j](http://www.dyn4j.org). Deze engine wordt nog actief ontwikkeld, en bevat dezelfde concepten als andere physics engines, zoals RigidBodies, Fixtures en Joints.
+![physics](images/week05/wreck.gif?right) Om een interactieve wereld te maken met objecten die reageren zoals in de werkelijke wereld moeten we dit uitprogrammeren, maar er kan ook gebruik gemaakt worden van een bestaande physics engine. Een voorbeeld van een bekende 2D physics engine is [Box2D](http://www.box2d.org), gebruikt in onder andere Angry Birds. Deze engine is echter geschreven in C++ en kunnen we niet gemakkelijk binnen java gebruiken. Gelukkig zijn er ook engines beschikbaar voor java, zoals [dyn4j](http://www.dyn4j.org). Deze engine wordt nog actief ontwikkeld, en bevat dezelfde concepten als andere physics engines, zoals RigidBodies, Fixtures en Joints.
 
 ## Installatie
 
-![add library](les5/addlibrary.png?right) Om dyn4j te gebruiken, moeten we deze bij het project toevoegen. Je kunt de jarfile van [dync4j](http://www.dyn4j.org) downloaden en via verkenner in je project zetten. Door de jarfile hierna te markeren als library, kan IntelliJ deze jarfile gebruiken. Dit kun je doen door het bestand te rechtsklikken, en hierna op 'mark as library' te klikken. Hierna is de jarfile als library gemarkeerd en kunnen we deze gebruiken.
+![add library](images/week05/addlibrary.png?right) Om dyn4j te gebruiken, moeten we deze bij het project toevoegen. Je kunt de jarfile van [dync4j](http://www.dyn4j.org) downloaden en via verkenner in je project zetten. Door de jarfile hierna te markeren als library, kan IntelliJ deze jarfile gebruiken. Dit kun je doen door het bestand te rechtsklikken, en hierna op 'mark as library' te klikken. Hierna is de jarfile als library gemarkeerd en kunnen we deze gebruiken.
 
-![classpath](les5/classpath1.png)
+![classpath](images/week05/classpath1.png)
 
 De library zal dan echter nog niet in het classpath van het project staan. De gemakkelijkste manier om dit toe te voegen is door een variabele te maken van het type World, en dan via de autocorrectie te kiezen om de library aan het classpath toe te voegen. Deze instellingen kun je natuurlijk ook in de module instellingen vinden, in het kopje Modules, op het tabblad 'Dependencies'.
 
@@ -245,22 +249,22 @@ Een Joint is een koppeling tussen verschillende RigidBodies. Door deze koppeling
 
 ### Distance Joint
 
-[![distance](les5/distance-joint.png?thumbright)](les5/distance-joint.png)De distance joint is een joint om een vaste afstand tussen 2 punten op de bodies vast te houden. Er zijn verder geen beperkingen in rotaties, dus beide objecten kunnen vrij ronddraaien. Let erop dat de locaties van de ankers belangrijk is, deze worden opgegeven in wereldcoördinaten bij het aanmaken van de joint
+[![distance](images/week05/distance-joint.png?thumbright)](images/week05/distance-joint.png)De distance joint is een joint om een vaste afstand tussen 2 punten op de bodies vast te houden. Er zijn verder geen beperkingen in rotaties, dus beide objecten kunnen vrij ronddraaien. Let erop dat de locaties van de ankers belangrijk is, deze worden opgegeven in wereldcoördinaten bij het aanmaken van de joint
 
 ### Revolute Joint
 
-[![revolute](les5/revolute-joint.png?thumbright)](les5/revolute-joint.png)Een revolute joint is een joint die alleen kan draaien, maar waarbij geen beweging mogelijk is. Er wordt 1 punt opgegeven, het draaipunt, waar de objecten aan elkaar verankert worden. Deze joint is bijvoorbeeld te gebruiken voor slingers of wielen. Het is ook mogelijk een motor op deze joint te zetten, om de objecten automatisch rond te laten draaien
+[![revolute](images/week05/revolute-joint.png?thumbright)](images/week05/revolute-joint.png)Een revolute joint is een joint die alleen kan draaien, maar waarbij geen beweging mogelijk is. Er wordt 1 punt opgegeven, het draaipunt, waar de objecten aan elkaar verankert worden. Deze joint is bijvoorbeeld te gebruiken voor slingers of wielen. Het is ook mogelijk een motor op deze joint te zetten, om de objecten automatisch rond te laten draaien
 
 ### Weld Joint
 
-[![weld](les5/weld-joint.png?thumbright)](les5/weld-joint.png)Een weld joint maakt 2 objecten aan elkaar vast, zonder flexibiliteit. Een weld joint is nog wel 'soft', dus bij veel kracht kan een weld joint wel gesplitst worden met grote krachten, maar deze zal wel terug naar elkaar trekken.
+[![weld](images/week05/weld-joint.png?thumbright)](images/week05/weld-joint.png)Een weld joint maakt 2 objecten aan elkaar vast, zonder flexibiliteit. Een weld joint is nog wel 'soft', dus bij veel kracht kan een weld joint wel gesplitst worden met grote krachten, maar deze zal wel terug naar elkaar trekken.
 
 ### Prismatic Joint
-[![weld](les5/prismatic-joint.png?thumbright)](les5/prismatic-joint.png)Een prismatic joint maakt 2 objecten aan elkaar vasts, waarbij de afstand tussen de 2 kan variëren, maar niet de hoek. Je kunt het dus zien alsof de objecten met een soort rails aan elkaar vast zitten. Het is ook mogelijk met een motor deze joint te zetten, deze zal de objecten dan lineair voortbewegen
+[![weld](images/week05/prismatic-joint.png?thumbright)](images/week05/prismatic-joint.png)Een prismatic joint maakt 2 objecten aan elkaar vasts, waarbij de afstand tussen de 2 kan variëren, maar niet de hoek. Je kunt het dus zien alsof de objecten met een soort rails aan elkaar vast zitten. Het is ook mogelijk met een motor deze joint te zetten, deze zal de objecten dan lineair voortbewegen
 
 ## Raycasting en collision testing
 
-![raycasting](les5/raycasting-input.png)
+![raycasting](images/week05/raycasting-input.png)
 
 Het is mogelijk in de wereld te testen of objecten geraakt worden door een ray, die noemen we raycasting. Het world object heeft een aantal [```raycast()```](http://docs.dyn4j.org/v3.2.4/org/dyn4j/dynamics/World.html#raycast-org.dyn4j.geometry.Ray-org.dyn4j.dynamics.Body-double-boolean-org.dyn4j.dynamics.RaycastResult-) methoden waarmee de wereld bekeken kan worden. Dit kan handig zijn voor bijvoorbeeld het schieten van een geweer of laser, om te bepalen wat er geraakt wordt.
 
@@ -273,7 +277,7 @@ In een normale game worden objecten meestal beïnvloed door de positie aan te pa
 ## Gebruik - Het slepen van een object met je muis
 
 
-## Opdrachten
+## Eindopdracht week 2
 
 1. Maak angry birds
     - Maak een wereld met aan de rechterkant een aantal blokken
@@ -281,3 +285,10 @@ In een normale game worden objecten meestal beïnvloed door de positie aan te pa
     - Om de katapult te besturensleep je het object in de katapult naar links, en als je deze loslaat schiet deze naar rechts
         - Dit kan lastig zijn, je zou ook de input doen door middel van 2 inputboxen, de force  en de hoek waaronder je schiet
     - ***uitdaging*** Zodra een blok hard geraakt wordt, verdwijnt het. Zodra alle blokken weg zijn heb je 't spel gewonnen
+
+
+{% include week02/exercise/06-blockdrag.md %}
+{: .exercises }
+
+
+Einde van week 5

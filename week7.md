@@ -2,11 +2,14 @@
 layout: default
 title: Week 7
 ---
+# Week 7
+{% include_relative /licence.md %}
+---
 # Platformer game
 
 ## Achtergrond inladen
 
-[![smb](les7/smb.png?thumbright)](les7/smb.png)De achtergrond die we gaan gebruiken is een tiled map. Deze map kan in tiled gemaakt worden, en hierna via de json file in code ingeladen worden. Een tiled file bestaat uit 2 belangrijke elementen, layers en tilemaps. Omdat de focus van deze applicatie niet op de tiled map ligt, worden wat aannames gemaakt. Door aan te nemen dat de map maar 1 layer heeft, en 1 tileset gebruikt, wordt de code om deze map in te laden en de tilesets te tekenen een stuk simpeler. De collision kan straks op basis van tileIDs gedaan worden. De attributen die opgeslagen worden zijn
+[![smb](images/week07/smb.png?thumbright)](images/week07/smb.png)De achtergrond die we gaan gebruiken is een tiled map. Deze map kan in tiled gemaakt worden, en hierna via de json file in code ingeladen worden. Een tiled file bestaat uit 2 belangrijke elementen, layers en tilemaps. Omdat de focus van deze applicatie niet op de tiled map ligt, worden wat aannames gemaakt. Door aan te nemen dat de map maar 1 layer heeft, en 1 tileset gebruikt, wordt de code om deze map in te laden en de tilesets te tekenen een stuk simpeler. De collision kan straks op basis van tileIDs gedaan worden. De attributen die opgeslagen worden zijn
 
 ```java
 BufferedImage[] tiles;
@@ -63,7 +66,7 @@ public void draw(Graphics2D g2d, double cameraX) {
 
 ## De speler
 
-[![player](les7/player.png?thumbright)](les7/player.png)De physics van de speler komen in een losse klasse. Deze klasse heeft een update- en teken-methode die we moeten implementeren. De graphics van de speler bestaat uit een spritesheet met verschillende sprites naast elkaar. In de spelerklasse kunnen we opslaan welk frame op dit moment getekend moet worden, de positie en de snelheid.
+[![player](images/week07/player.png?thumbright)](images/week07/player.png)De physics van de speler komen in een losse klasse. Deze klasse heeft een update- en teken-methode die we moeten implementeren. De graphics van de speler bestaat uit een spritesheet met verschillende sprites naast elkaar. In de spelerklasse kunnen we opslaan welk frame op dit moment getekend moet worden, de positie en de snelheid.
 
 ```java
 private BufferedImage[] images;
@@ -270,3 +273,7 @@ if(player.position.getX() - cameraX > 140)
 ## Interactie met vijanden
 
 ## Interactie met blokken
+
+---
+
+Einde van week 7
