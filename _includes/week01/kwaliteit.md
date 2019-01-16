@@ -1,6 +1,6 @@
 # Kwaliteit
 
-![quality](/images/week01/quality.png)
+![quality](images/week01/quality.png)
 
 Om de kwaliteit van lijnen te verbeteren kan anti-aliasing aangezet worden. [Anti-aliasing](https://nl.wikipedia.org/wiki/Anti-aliasing) is een techniek om kartelranden te voorkomen bij het tekenen van scheve objecten zoals lijnen. Anti-aliasing kan aangezet worden binnen het Graphics2D object en kan ook uitgezet worden indien het niet nodig is. Anti-aliasing zorgt voor een beter ogend resultaat, maar gaat wel ten koste van performance omdat het renderen langzamer gaat.
 

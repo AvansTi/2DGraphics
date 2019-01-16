@@ -1,6 +1,6 @@
 # Lijnen
 
-![line](/images/week01/line.png)
+![line](images/week01/line.png)
 
 Java2D werkt met een [Carthesisch Coördinatenstelsel](https://nl.wikipedia.org/wiki/Cartesisch_coördinatenstelsel). In het kort betekent dit dat er gebruik wordt gemaakt van een X- en een Y-as. De oorsprong van het coördinatenstelsel ligt standaard linksboven in het venster, waarbij de Y-as naar beneden loopt. Dit is dus gespiegeld ten opzichte van het wiskundige assenstelsel dat normaal gebruikt wordt om bijvoorbeeld grafieken te tekenen. Standaard is de eenheid een pixel, dit betekent dus dat punt (200,100) 200 pixels naar rechts, en 100 pixels naar beneden ligt ten opzichte van de linkerbovenhoek. Dit is een standaard die in veel grafische APIs gebruikt wordt.
 
