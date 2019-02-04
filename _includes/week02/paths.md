@@ -5,10 +5,7 @@ Een speciale shape is een Path2D. Een Path is een combinatie van lijnen die gebr
 ![GeneralPath](images/week02/generalpath.png?right)
 
 ```java
-public void paintComponent(Graphics g)
-{
-    super.paintComponent(g);
-    Graphics2D g2d = (Graphics2D)g;
+public void draw(FXGraphics2D g2d) {
 
     GeneralPath path = new GeneralPath();
     path.moveTo(100, 100);
@@ -22,6 +19,7 @@ public void paintComponent(Graphics g)
     g2d.draw(path);
 }
 ```
+
 De GeneralPath klasse heeft de volgende methoden:
 
 - ```moveTo(double x, double y)``` Beweegt de cursor naar positie (x,y) zonder een lijn te tekenen.

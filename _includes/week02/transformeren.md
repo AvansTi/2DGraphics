@@ -13,10 +13,10 @@ tx.translate(10,10);
 tx.concatenate(new AffineTransform(1,2,0,0,1,0));
 tx.scale(0.5, 0.5);
 ```
-In deze code worden 2 AffineTransforms gecombineerd, en worden ze verder aangepast. De ```translate```, ```rotate``` en ```scale``` methoden werken op een transform door, en worden dus automatisch gecombineerd. Let hierbij ook weer op de volgorde van transformeren.
+In deze code worden 2 AffineTransforms gecombineerd, en worden ze verder aangepast. De `translate`, `rotate` en `scale` methoden werken op een transform door, en worden dus automatisch gecombineerd. Let hierbij ook weer op de volgorde van transformeren.
 
 <!-- _todo:_ matrixvermenigvuldigingen en volgorde-->
-Een AffineTransform bevat een matrix, die steeds aangepast wordt. De ```translate(x1, y2)``` methode maakt bijvoorbeeld de matrix ![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x1%20%5C%5C%200%20%26%201%20%26%20y1%20%5Cend%7Bpmatrix%7D). Door deze matrix te vermenigvuldigen met de matrix ![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x2%20%5C%5C%200%20%26%201%20%26%20y2%20%5Cend%7Bpmatrix%7D), krijg je de gecombineerde matrix, ![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x1+x2%20%5C%5C%200%20%26%201%20%26%20y1+y2%20%5Cend%7Bpmatrix%7D) (ga dit na). Ditzelfde principe werkt ook voor bijvoorbeeld een schaling. Hierij is de volgorde erg belangrijk. Als eerst geschaald wordt, en hierna verplaatst, wordt ook de verplaatsing meegeschaald. We zien dit in de vermenigvuldiging:
+Een AffineTransform bevat een matrix, die steeds aangepast wordt. De `translate(x1, y2)` methode maakt bijvoorbeeld de matrix ![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x1%20%5C%5C%200%20%26%201%20%26%20y1%20%5Cend%7Bpmatrix%7D). Door deze matrix te vermenigvuldigen met de matrix ![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x2%20%5C%5C%200%20%26%201%20%26%20y2%20%5Cend%7Bpmatrix%7D), krijg je de gecombineerde matrix, ![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x1+x2%20%5C%5C%200%20%26%201%20%26%20y1+y2%20%5Cend%7Bpmatrix%7D) (ga dit na). Ditzelfde principe werkt ook voor bijvoorbeeld een schaling. Hierij is de volgorde erg belangrijk. Als eerst geschaald wordt, en hierna verplaatst, wordt ook de verplaatsing meegeschaald. We zien dit in de vermenigvuldiging:
 
 ![scale1](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x1%20%5C%5C%200%20%26%201%20%26%20y1%20%5Cend%7Bpmatrix%7D%20%5Ctimes%20%5Cbegin%7Bpmatrix%7D%20s%20%26%200%20%26%200%20%5C%5C%200%20%26%20s%20%26%200%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20s%20%26%200%20%26%20x1%20%5C%5C%200%20%26%20s%20%26%20y1%20%5Cend%7Bpmatrix%7D)
 
@@ -26,7 +26,7 @@ Dit kan gebruikt om objecten in een lokaal stelsel op te slaan, en hierna te tra
 
 ### Gebruiken van transformaties - Shape transformeren
 
-De AffineTransform heeft ook een [```createTransformedShape()```](https://docs.oracle.com/javase/7/docs/api/java/awt/geom/AffineTransform.html#createTransformedShape(java.awt.Shape)) methode. Hiermee kun je een shape transformeren, om 'm op een andere plek te zetten. Op deze manier kun je dus gemakkeljk een AffineTransform gebruiken om een Shape te verplaatsen zonder de shape aan te passen. Dit doe je met de ```createTransformedShape(Shape shape)``` methode in de AffineTransform. Op deze manier kun je gemakkelijk ieder object een eigen positie, rotatie en schaal geven, en deze flexibel aanpassen. We krijgen dan dus de volgende code:
+De AffineTransform heeft ook een [`createTransformedShape()`](https://docs.oracle.com/javase/7/docs/api/java/awt/geom/AffineTransform.html#createTransformedShape(java.awt.Shape)) methode. Hiermee kun je een shape transformeren, om 'm op een andere plek te zetten. Op deze manier kun je dus gemakkeljk een AffineTransform gebruiken om een Shape te verplaatsen zonder de shape aan te passen. Dit doe je met de `createTransformedShape(Shape shape)` methode in de AffineTransform. Op deze manier kun je gemakkelijk ieder object een eigen positie, rotatie en schaal geven, en deze flexibel aanpassen. We krijgen dan dus de volgende code:
 
 ```java
 class Renderable
@@ -44,7 +44,7 @@ class Renderable
         this.scale = scale;
     }
 
-    public void draw(Graphics2D g2d)
+    public void draw(FXGraphics2D g2d)
     {
         g2d.draw(getTransformedShape());
     }
@@ -65,31 +65,31 @@ class Renderable
 }
 ```
 
-Deze code tekent een object op een bepaalde positie, met een lokale rotatie en schaal. Deze attributen zijn in code gemakkelijk aan te passen, waardoor zo'n object gemakkelijk verplaatst, gedraait of geschaalt kan worden. Let bij het gebruik van deze code erop dat het object waar je een shape van maakt om zijn oorsprong draait, dus gebruik bijvoorbeeld een ```new Rectangle(-50,-50,100,100)``` voor een blok dat om zijn middelpunt draait. Deze coördinaten noemen we coördinaten in de lokale ruimte, de 'object space'. Om dit object te gebruiken kun je de volgende code gebruiken:
+Deze code tekent een object op een bepaalde positie, met een lokale rotatie en schaal. Deze attributen zijn in code gemakkelijk aan te passen, waardoor zo'n object gemakkelijk verplaatst, gedraait of geschaalt kan worden. Let bij het gebruik van deze code erop dat het object waar je een shape van maakt om zijn oorsprong draait, dus gebruik bijvoorbeeld een `new Rectangle(-50,-50,100,100)` voor een blok dat om zijn middelpunt draait. Deze coördinaten noemen we coördinaten in de lokale ruimte, de 'object space'. Om dit object te gebruiken kun je de volgende code gebruiken:
 
 ```java
-public class HelloRenderable extends JPanel {
-    public static void main(String[] args)
-    {
-        JFrame frame = new JFrame("Hello Java2D");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(800, 600));
-        frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        frame.setContentPane(new HelloRenderable());
-        frame.setVisible(true);
+public class HelloRenderable extends Application {
+
+    Stage stage;
+    ArrayList<Renderable> renderables = new ArrayList<>();
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
+        javafx.scene.canvas.Canvas canvas = new Canvas(1920, 1080);
+        draw(new FXGraphics2D(canvas.getGraphicsContext2D()));
+        primaryStage.setScene(new Scene(new Group(canvas)));
+        primaryStage.setTitle("Hello transforms");
+        primaryStage.show();
     }
 
-    ArrayList<Renderable> renderables = new ArrayList<>();
     HelloRenderable()
     {
         renderables.add(new Renderable(new Rectangle2D.Double(-50,-50,100,100), new Point2D.Double(400,400), 0.25f * (float)Math.PI, 0.75f));
         renderables.add(new Renderable(new Rectangle2D.Double(-50,-50,100,100), new Point2D.Double(600,400), -0.25f * (float)Math.PI, 1.75f));
     }
 
-    public void paintComponent(Graphics g)
-    {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D)g;
+    public void draw(FXGraphics2D g2d) {
 
         for(Renderable r : renderables)
             r.draw(g2d);
@@ -102,7 +102,7 @@ public class HelloRenderable extends JPanel {
 
 ![camera](images/week02/scroll.gif)![camera](images/week02/scroll2.gif)<!--http://prostheticknowledge.tumblr.com/post/118534852886/scroll-back-gaming-study-by-itaykeren-looks-at-the-->
 
-In veel applicaties kunnen we het viewport verplaatsen en in of uitzoomen op een wereld. Denk hierbij aan bijvoorbeeld een applicatie waar een wereld van boven bekeken wordt, of een sidescrolling game. Dit doen we door een transformatie uit te voeren op het gehele venster. Dit kan in Java door middel van de ```Graphics2D.setTransform(AffineTransform transform)``` methode. Dit werkt op dezelfde manier als dat we in [Les 1](Les1#Transformaties) hebben gedaan, maar nu kunnen we een AffineTransform object meegeven in plaats van losse translate, rotate en scale methoden te gebruiken. We kunnen hiervoor een camera object definiëren die een AffineTransform genereerd
+In veel applicaties kunnen we het viewport verplaatsen en in of uitzoomen op een wereld. Denk hierbij aan bijvoorbeeld een applicatie waar een wereld van boven bekeken wordt, of een sidescrolling game. Dit doen we door een transformatie uit te voeren op het gehele venster. Dit kan in Java door middel van de `Graphics2D.setTransform(AffineTransform transform)` methode. Dit werkt op dezelfde manier als dat we in [Les 1](Les1#Transformaties) hebben gedaan, maar nu kunnen we een AffineTransform object meegeven in plaats van losse translate, rotate en scale methoden te gebruiken. We kunnen hiervoor een camera object definiëren die een AffineTransform genereerd
 
 ```java
 class Camera
@@ -125,7 +125,7 @@ Door nu transformaties op een slimme manier te combineren, kunnen we transformer
 
 ### Gebruiken van transformaties - Inverse
 
-Als een camera gebruikt wordt om het scherm te scrollen, wordt het bepalen van de wereld-coördinaten van een muisklik een stuk lastiger. Er moet rekening gehouden worden met de positie, zoom en eventueel rotatie van de camera. Om dit op te lossen kunnen we de inverse van de cameratransformatie gebruiken. Als we de inverse van de cameratransformatie toepassen op de locatie van de muiscursor, krijgen we de wereld-coördinaten van dat punt. De AffineTransform klasse heeft hier de methode ```inverseTransform(Point2D source, Point2D destination)``` voor. Deze methode kun je op verschilende manieren gebruiken:
+Als een camera gebruikt wordt om het scherm te scrollen, wordt het bepalen van de wereld-coördinaten van een muisklik een stuk lastiger. Er moet rekening gehouden worden met de positie, zoom en eventueel rotatie van de camera. Om dit op te lossen kunnen we de inverse van de cameratransformatie gebruiken. Als we de inverse van de cameratransformatie toepassen op de locatie van de muiscursor, krijgen we de wereld-coördinaten van dat punt. De AffineTransform klasse heeft hier de methode `inverseTransform(Point2D source, Point2D destination)` voor. Deze methode kun je op verschilende manieren gebruiken:
 
 ```java
 Point2D mousePosition = .....;

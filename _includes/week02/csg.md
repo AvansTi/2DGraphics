@@ -31,10 +31,7 @@ Geeft alleen de ruimte die of in de een, of in de andere vorm zit, maar niet all
 In java werkt CSG door middel van de [Area](https://docs.oracle.com/javase/7/docs/api/java/awt/geom/Area.html) klasse. Deze klasse is ook een Shape, en kan gemaakt worden op basis van een shape in de constructor. Door een bestaande Shape in een Area te encapsuleren kun je dus gemakkelijk CSG operaties hierop toepassen, en het resultaat kun je meteen tekenen.
 
 ```java
-public void paintComponent(Graphics g)
-{
-    super(g);
-    Graphics2D g2d = (Graphics2D)g;
+public void draw(FXGraphics2D g2d) {
 
     Area a = new Area(new Ellipse2D.Double(0,0,100,100));
     Area b = new Area(new Ellipse2D.Double(50,0,100,100));
@@ -89,7 +86,5 @@ Je kunt CSG gebruiken om nieuwe vormen te maken, maar je kunt er nog meer mee do
 - Overlap detecteren.
 - Onwikkelen van grote complexe vormen (levels).
 
-
 {% include week02/exercise/02-yingyang.md %}
 {: .exercises }
-
