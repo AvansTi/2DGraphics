@@ -12,7 +12,7 @@
 >>
 >> ```math
 >> x = a × cos(b × ø) + c × cos(d × ø)
->> y = a × sin(b × ø) + c × cos(d × ø)
+>> y = a × sin(b × ø) + c × sin(d × ø)
 >> ```
 >>
 >> Dit zijn versimpelde formules, op wikipedia staan net iets andere formules, deze kun je ook gebruiken maar zijn iets complexer om te implementeren, maar wel gemakkelijker te configureren. Door de variabelen a,b,c en d aan te passen kun je een andere figuur te maken.
