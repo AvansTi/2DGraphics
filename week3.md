@@ -18,10 +18,9 @@ title: Week 3
 {% include week03/timing.md %}
 ---
 
-# Eindopdracht week 2
+# Eindopdracht week 3
 
-{% include week02/exercise/06-blockdrag.md %}
+{% include week03/exercise/05-screensaver.md %}
 {: .exercises }
 
-
-Einde van week 2
+Einde van week 3

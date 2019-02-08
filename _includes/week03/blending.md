@@ -27,3 +27,6 @@ public void draw(FXGraphics2D g2d) {
     g2d.fill(new Rectangle2D.Double(100,100,100,100));
 }
 ```
+
+{% include week03/exercise/03-image-fading.md %}
+{: .exercises }

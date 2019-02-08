@@ -1,6 +1,6 @@
 ## Animeren met timers
 
-Animatie in computer graphics wordt gedaan door het scherm steeds opnieuw te tekenen, waarbij objecten steeds een klein beetje veranderen. Door de X-coordinaat van een object op te hogen krijg je een beweging naar rechts. We kunnen dit proces opdelen in twee, van elkaar losstaande delen code; het updaten en het tekenen. Door nu intern variabelen op te slaan met de state van de applicatie, deze aan te passen in de update, en te gebruiken in de paint kunnen we nu animeren. Voor het steeds opnieuw aanroepen van code gebruiken we de [`AnimationTimer`](https://docs.oracle.com/javafx/2/api/javafx/animation/AnimationTimer.html) klasse. Deze kunnen we via de volgende constructie aanmaken:
+Animatie in computer graphics wordt gedaan door het scherm steeds opnieuw te tekenen, waarbij objecten steeds een klein beetje veranderen. Door de X-coordinaat van een object op te hogen krijg je een beweging naar rechts. We kunnen dit proces opdelen in twee, van elkaar losstaande delen code; het updaten en het tekenen. Door nu intern variabelen op te slaan met de state van de applicatie, deze aan te passen in de update, en te gebruiken in de draw kunnen we nu animeren. Voor het steeds opnieuw aanroepen van code gebruiken we de [`AnimationTimer`](https://docs.oracle.com/javafx/2/api/javafx/animation/AnimationTimer.html) klasse. Deze kunnen we via de volgende constructie aanmaken:
 
 ```java
 public class HelloAnimation extends Application {
@@ -48,8 +48,7 @@ public class HelloAnimation extends Application {
 }
 ```
 
-PSM: GOOSSENS: TODO!
-In de constructor van de timer geven we aan dat de actionPerformed methode 60x per seconde wordt aangeroepen. De actionPerformed methode bevat dan de code die uitgevoerd moet worden om alle objecten te bewegen en te animeren, waarna de repaint() aangeroepen wordt. De `paint()` stuurt intern in Java een verzoek om het venster opnieuw te tekenen. Java2D zal dan zelf schedulen wanneer de paintComponent aangeroepen gaat worden. Je kunt meerdere keren repaint() aanroepen, maar dit betekent dus niet dat er ook meerdere keren opnieuw getekent wordt. Zorg er daarom dus voor dat de actionPerformed niet te veel zware code bevat, omdat er pas opnieuw getekend wordt zodra de actionPerformed afgerond is.
+De `AnimationTimer` kan aangemaakt worden in de `start` methode. De implementatie van deze methode bevat alles wat nodig is om alle objecten te laten bewegen en animeren. De timer zal dus steeds twee methodes aanroepen, namelijk de `update` en `draw` methode. De `draw` method wordt ook aangeroepen wanneer je bijvoorbeeld het scherm schaalt. De `update` methode zorgt ervoor dat de state van alle objecten word aangepast, afhankelijk van de update snelheid. De `draw` methode is alleen verantwoordelijk voor het tekenen van alle objecten. Het is belangrijk dat de `update` methode niet te lang duurt!
 
 **Let op: de volgende code gaat dus niet werken:**
 

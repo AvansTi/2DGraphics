@@ -62,3 +62,6 @@ public HelloImage() {
 ```
 
 Sommige spritesheets hebben sprites die niet allemaal even groot zijn en niet op opvolgende plaasten staan. Hier zit dan altijd een extra bestand bij dat geparsed moet worden om de locatie van de sprites te vinden en uit te knippen.
+
+{% include week03/exercise/02-bewegend-karakter.md %}
+{: .exercises }

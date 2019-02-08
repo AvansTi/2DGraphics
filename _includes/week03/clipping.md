@@ -15,3 +15,6 @@ public void draw(FXGraphics2D g2d) {
     }
 }
 ```
+
+{% include week03/exercise/04-spotlight.md %}
+{: .exercises }

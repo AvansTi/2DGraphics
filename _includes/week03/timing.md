@@ -1,8 +1,8 @@
 ## Timing
 
-Niet elke computer kan meer dan 30 frames per seconden. Dit kan ook gebeuren als er een zware berekening op de achtergrond gedaan wordt. Om er voor te zorgen dat alle objecten dan toch even snel blijven bewegen kunnen we gebruik maken een deltatime parameter in de `update` methode.
+Niet elke computer kan meer dan 30 frames per seconden aan. Dit kan ook gebeuren als er een zware berekening op de achtergrond gedaan wordt. Om er voor te zorgen dat alle objecten dan toch even snel blijven bewegen kunnen we gebruik maken een deltatime parameter in de `update` methode.
 
-Door gebruik te maken van een deltatime, die genormaliseerd is om basis van 1 seconden, voorkom je dit probleem. Als de computer waarop het programma afspeelt maar 5 FPS aan kan is de deltatime een stuk groter (0.2) dan wanneer de computer 60 FPS aankan.
+Door gebruik te maken van een deltatime, die genormaliseerd is om basis van 1 seconden, voorkom je dit probleem. Als de computer waarop het programma afspeelt maar 5 FPS aan kan is de deltatime een stuk groter (deltatime=0.2) dan wanneer de computer 60 FPS (deltatime=0.017) aankan.
 
 ```java
 public class HelloAnimation extends Application {
