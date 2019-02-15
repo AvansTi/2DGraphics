@@ -12,27 +12,23 @@ title: Week 4
 Om een bewegend punt op te slaan, kan dit gemodelleerd worden met een locatie, snelheid en versnelling. Om dit punt een tijdstap verder te zetten, kan de volgende code gebruikt worden:
 
 ```java
-class Particle
-{
+class Particle {
     private Point2D position;
     private Point2D speed;
     private Point2D acceleration;
 
-    public Particle(Point2D position)
-    {
+    public Particle(Point2D position) {
         this.position = position;
         this.speed = new Point2D.Double(0,0);
         this.acceleration = new Point2D.Double(0,-9.8); // gravity
     }
 
-    public void update()
-    {
+    public void update() {
         this.position = new Point2D.Double(position.getX() + speed.getX(), position.getY() + speed.getY());
         this.speed = new Point2D.Double(speed.getX() + acceleration.getX(), speed.getY() + acceleration.getY());
     }
 
-    public void draw(Graphics2D g2d)
-    {
+    public void draw(FXGraphics2D g2d) {
         g2d.fill(new Ellipse2D.Double(position.getX()-5, position.getY()-5, 10, 10));
     }
 }
@@ -43,36 +39,48 @@ class Particle
 Door nu iedere keer dat de timer tikt de update aan te roepen, zal het punt in een animatie naar beneden vallen. Door nu een lijst van particles te maken, en de update en draw methoden correct aan te roepen worden meerdere particles geanimeerd en op het scherm getekend.
 
 ```java
-class VerletDemo extends JPanel implements ActionListener
-{
-    public static void main(String[] args)
-    {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(new VerletDemo());
-        frame.setMinimumSize(new Dimension(800,600));
-        frame.setVisible(true);
-    }
+public class VerletDemo extends Application {
 
+    private Stage stage;
     private ArrayList<Particle> particles = new ArrayList<>();
 
-    VerletDemo()
-    {
-        particles.add(new Particle(100,100));
-        new Timer(1000/60,this).start();
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
+        Canvas canvas = new Canvas(1920, 1080);
+        FXGraphics2D g2d = new FXGraphics2D(canvas.getGraphicsContext2D());
+        draw(g2d);
+        primaryStage.setScene(new Scene(new Group(canvas)));
+        primaryStage.setTitle("Hello Ball");
+        primaryStage.show();
+
+        new AnimationTimer() {
+            long last = -1;
+            @Override
+            public void handle(long now) {
+                if(last == -1)
+                    last = now;
+                update((now - last) / 1.0e9);
+                last = now;
+                draw(g2d);
+            }
+        }.start();
+
     }
 
-    public void actionPerformed(ActionEvent e)
-    {
+    VerletDemo() {
+        particles.add(new Particle(100,100));
+    }
+
+    public void update(double deltaTime) {
         for(Particle p : particles)
             p.update();
         repaint();
     }
 
-    public void paintComponent(Graphics g)
-    {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D)g;
+    public void draw(FXGraphics2D g2d) {
+        g2d.setColor(Color.white);
+        g2d.clearRect(0,0, 1920, 1080);
 
         for(Particle p : particles)
             p.draw(g2d);
@@ -85,21 +93,20 @@ class VerletDemo extends JPanel implements ActionListener
 Deze code zal een particle aanmaken, updaten en tekenen, met de mogelijkheid om er meer te tekenen. Deze voorstelling werkt goed voor simpele particles, maar het is nu erg lastig om direct het gedrag te beïnvloeden. Als een particle stilgezet wordt of verplaatst wordt vanuit de gebruikerscode, moet ook de snelheid opnieuw berekend worden, en past ook de acceleratie aan. De snelheid kan ook geïntegreerd worden, waardoor de positie en vorige positie opgeslagen wordt. De snelheid is dan gelijk aan de (huidige positie - vorige positie). De volgende code vat dit samen:
 
 ```java
-class Particle
-{
+class Particle {
     private Point2D position;
     private Point2D lastPosition;
     private Point2D acceleration;
+    private double size;
 
-    public Particle(Point2D position)
-    {
+    public Particle(Point2D position) {
         this.position = position;
         this.lastPosition = position;
         this.acceleration = new Point2D.Double(0,-9.8); // gravity
+        this.size = 10;
     }
 
-    public void update()
-    {
+    public void update() {
         Point2D old = position;
         position = new Point2D.Double(
                 position.getX() + (position.getX() - lastPosition.getX()) + force.getX(),
@@ -108,14 +115,12 @@ class Particle
         lastPosition = old;
     }
 
-    public void setPosition(Point2D position)
-    {
+    public void setPosition(Point2D position) {
         this.position = position;
     }
 
-    public void draw(Graphics2D g2d)
-    {
-        g2d.fill(new Ellipse2D.Double(position.getX()-5, position.getY()-5, 10, 10));
+    public void draw(Graphics2D g2d) {
+        g2d.fill(new Ellipse2D.Double(position.getX()-size/2, position.getY()-size/2, size, size));
     }
 }
 ```
@@ -128,10 +133,9 @@ Let hierbij op dat de positie eerst opgeslagen wordt voordat deze veranderd word
  Door nu code toe te voegen om de punten te beïnvloeden kunnen bepaalde effecten gecreëerd worden. Twee voorbeelden van dit soort invloeden zijn het vastzetten van een punt op een vaste locatie en het op een vaste afstand te houden van twee punten. Deze twee beperkingen kunnen samengevat worden in een Constraint, waar subklassen van gemaakt worden die constraints voorstellen.
 
 ```java
-abstract class Constraint
-{
+abstract class Constraint {
     public abstract void satisfy();
-    public abstract void draw(Graphics2D g2d); 
+    public abstract void draw(FXGraphics2D g2d);
 }
 ```
 
@@ -152,23 +156,23 @@ public class StaticConstraint extends Constraint {
         particle.setPosition(position);
     }
 
-    public void draw(Graphics2D g2d) {
+    public void draw(FXGraphics2D g2d) {
 
     }
 }
 ```
 
-De satisfy methode zal de particle op een vaste plek zetten. Door deze nu aan te roepen nadat alle particles geupdate zijn, blijft de particle op de juiste plek staan. 
+De satisfy methode zal de particle op een vaste plek zetten. Door deze nu aan te roepen nadat alle particles geupdate zijn, blijft de particle op de juiste plek staan.
 
 ![constraint](images/week04/constraint_particle.png?right)Een ander soort constraint is een vaste-afstand constraint. Deze constraint zorgt ervoor dat twee punten altijd op dezelfde afstand blijven. Als punten te ver van elkaar vandaan staan, worden ze naar elkaar toe verplaatst en wanneer ze te dicht op elkaar staan worden ze naar buiten verplaatst. Door een vaste afstand in te stellen en de echte afstand te berekenen, kan het verschil hiertussen berekend worden. Hierna kan je de verschilvector van de twee punten nemen, deze normaliseren en de helft van het verschil met deze vector vermenigvuldigen, en dit bij het ene punt optellen, en van het andere punt afhalen.
 
 In de afbeelding hiernaast: bekend is punt A en B, dit zijn de posities van de twee particles in de constraint. De bedoeling na de update is om deze op posities C en D zetten. Om A op positie C te zetten, moet eerst de vector AC berekend worden.
 
-- Verschil = B - A
-- Genormaliseerd = Verschil / lengte(Verschil)
-- Correctie = (lengte(Verschil) - gewensteLengte) / 2
-- AC = genormaliseerd * Correctie
-- C = A + AC
+- Verschil = *B - A*
+- Genormaliseerd = *Verschil / lengte(Verschil)*
+- Correctie = *(lengte(Verschil) - gewensteLengte) / 2*
+- AC = *genormaliseerd * Correctie*
+- C = *A + AC*
 
 Hetzelfde kan berekend worden voor D en C. De waarde van CD is echter -AC, en hoeft dus niet opnieuw berekend te worden. Dit kan in de volgende code samengevat worden:
 
@@ -240,32 +244,11 @@ Een blob is te modelleren als een centrum met een buitenkant.
 
 ![bridge](images/week04/bridge2.png)
 
-## Opdrachten
-
-1. Bestudeer de verlet engine die in de les is gebouwd
-
-2. Voeg extra modelijkheden toe om punten en distance constraints toe te voegen aan het systeem
-    - Als gewoon links geklikt wordt voeg een particle toe met 1 constraint
-    - Als gewoon rechts geklikt wordt, voeg een particle toe met 2 distance constraints.
-    - Als Ctrl-rechts geklikt wordt, voeg een particle toe met 2 distance constraints met 2 vaste lengtes (bijvoorbeeld 100)
-    - Als shift-rechts geklikt wordt, voeg een constraint toe tussen de 2 dichtsbijzijnde particles
-    - Met Ctrl-links geklikt een particle met een StaticConstraint op dat punt
-
-    Tip: Het MouseEvent object heeft de methoden ```isControlDown()```, ```isAltDown()``` en ```isShiftDown()```. Deze kun je gebruiken om te kijken welke knoppen zijn ingedrukt. Daarnaast kun je kijken welke muisknop ingedrukt is met ```SwingUtilities.isLeftButtonPressed(MouseEvent e)``` en ```SwingUtilities.isRightButtonPressed(MouseEvent e)``` kijken welke muisknop ingedrukt is.
-3. Verkleur de constraints op basis van de kracht die op een constraint staat. De 'kracht' kun je krijgen door het verschil te nemen van de lengte tussen de 2 punten, en de lengte die het zou moeten zijn
-
-4. Maak een nieuwe constraint toe, RopeConstraint, die alleen punten dichter naar elkaar zet als de punten te ver weg van elkaar zijn, maar als de punten te dicht bij elkaar zijn niets doet
-
-5. Voeg de mogelijkheid toe om een doek toe te voegen.
-
-6. Zorg ervoor dat de scene opgeslagen en ingeladen kan worden.
-
 ---
 
 # Eindopdracht week 4
 
-{% include week02/exercise/06-blockdrag.md %}
+{% include week04/exercise/01-Verlet.md %}
 {: .exercises }
-
 
 Einde van week 4
