@@ -5,12 +5,12 @@ Naast het transformeren van het hele venster, is het ook mogelijk om een shape l
 Om een complete transformatie voor te stellen kunnen we de AffineTransform klasse gebruiken. Een AffineTransform is een klasse die een (combinatie van) transformaties op kan slaan, en deze ook kan toepassen op vormen en punten. Intern slaat de AffineTransform een matrix op, die we kunnen manipuleren met de verschillende methoden. Voor standaard 2D transformaties wordt een 3x3 matrix gebruikt, maar omdat de onderste rij eigenlijk altijd [0, 0, 1] is, wordt deze weggelaten in de AffineTransform klasse, en slaat deze dus een 3x2 matrix op. Daarom dat je in de verschillende methoden die direct de matrix aanpassen ook maar 6 parameters ziet. Deze matrices kunnen we zelf samenstellen
 ![Matrices](images/week02/transformmatrices.png)
 Deze matrices kun je zelf berekenen en in een AffineTransform zetten door middel van de constructor. Stel dat je een shear wil doen over de X-as met een factor 2 dan kun je de matrix
-![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bbmatrix%7D%201%20%26%202%20%26%200%20%5C%5C%200%20%26%201%20%26%200%20%5C%5C%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D) gebruiken. De onderste rij gebruiken we niet, dus we kunnen deze in java invullen met de constructor ```new AffineTransform(1,2,0,0,1,0);```. Om deze nu met elkaar te combineren, kunnen we de volgende code gebruiken:
+![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bbmatrix%7D%201%20%26%202%20%26%200%20%5C%5C%200%20%26%201%20%26%200%20%5C%5C%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D) gebruiken. De onderste rij gebruiken we niet, dus we kunnen deze in java invullen met de constructor ```new AffineTransform(1,0,2,1,0,0);```. Om deze nu met elkaar te combineren, kunnen we de volgende code gebruiken:
 
 ```java
 AffineTransform tx = new AffineTransform();
 tx.translate(10,10);
-tx.concatenate(new AffineTransform(1,2,0,0,1,0));
+tx.concatenate(new AffineTransform(1,0,2,1,0,0));
 tx.scale(0.5, 0.5);
 ```
 In deze code worden 2 AffineTransforms gecombineerd, en worden ze verder aangepast. De `translate`, `rotate` en `scale` methoden werken op een transform door, en worden dus automatisch gecombineerd. Let hierbij ook weer op de volgorde van transformeren.
