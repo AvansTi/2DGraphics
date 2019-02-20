@@ -12,7 +12,7 @@ title: Week 4
 Om een bewegend punt op te slaan, kan dit gemodelleerd worden met een locatie, snelheid en versnelling. Om dit punt een tijdstap verder te zetten, kan de volgende code gebruikt worden:
 
 ```java
-class Particle {
+public class Particle {
     private Point2D position;
     private Point2D speed;
     private Point2D acceleration;
@@ -51,7 +51,7 @@ public class VerletDemo extends Application {
         FXGraphics2D g2d = new FXGraphics2D(canvas.getGraphicsContext2D());
         draw(g2d);
         primaryStage.setScene(new Scene(new Group(canvas)));
-        primaryStage.setTitle("Hello Ball");
+        primaryStage.setTitle("Hello Verlet");
         primaryStage.show();
 
         new AnimationTimer() {
@@ -68,7 +68,7 @@ public class VerletDemo extends Application {
 
     }
 
-    VerletDemo() {
+    public void init() {
         particles.add(new Particle(100,100));
     }
 
@@ -93,7 +93,7 @@ public class VerletDemo extends Application {
 Deze code zal een particle aanmaken, updaten en tekenen, met de mogelijkheid om er meer te tekenen. Deze voorstelling werkt goed voor simpele particles, maar het is nu erg lastig om direct het gedrag te beïnvloeden. Als een particle stilgezet wordt of verplaatst wordt vanuit de gebruikerscode, moet ook de snelheid opnieuw berekend worden, en past ook de acceleratie aan. De snelheid kan ook geïntegreerd worden, waardoor de positie en vorige positie opgeslagen wordt. De snelheid is dan gelijk aan de (huidige positie - vorige positie). De volgende code vat dit samen:
 
 ```java
-class Particle {
+public class Particle {
     private Point2D position;
     private Point2D lastPosition;
     private Point2D acceleration;
@@ -119,7 +119,7 @@ class Particle {
         this.position = position;
     }
 
-    public void draw(Graphics2D g2d) {
+    public void draw(FXGraphics2D g2d) {
         g2d.fill(new Ellipse2D.Double(position.getX()-size/2, position.getY()-size/2, size, size));
     }
 }
@@ -133,21 +133,20 @@ Let hierbij op dat de positie eerst opgeslagen wordt voordat deze veranderd word
  Door nu code toe te voegen om de punten te beïnvloeden kunnen bepaalde effecten gecreëerd worden. Twee voorbeelden van dit soort invloeden zijn het vastzetten van een punt op een vaste locatie en het op een vaste afstand te houden van twee punten. Deze twee beperkingen kunnen samengevat worden in een Constraint, waar subklassen van gemaakt worden die constraints voorstellen.
 
 ```java
-abstract class Constraint {
-    public abstract void satisfy();
-    public abstract void draw(FXGraphics2D g2d);
+public interface Constraint {
+    void satisfy();
+    void draw(FXGraphics2D g2d);
 }
 ```
 
 Een constraint om een punt op een vast punt te houden is nu bijvoorbeeld:
 
 ```java
-public class StaticConstraint extends Constraint {
+public class StaticConstraint implements Constraint {
     private Point2D position;
     private Particle particle;
 
     public StaticConstraint(Particle particle) {
-        super();
         this.position = particle.getPosition();
         this.particle = particle;
     }
@@ -177,13 +176,12 @@ In de afbeelding hiernaast: bekend is punt A en B, dit zijn de posities van de t
 Hetzelfde kan berekend worden voor D en C. De waarde van CD is echter -AC, en hoeft dus niet opnieuw berekend te worden. Dit kan in de volgende code samengevat worden:
 
 ```java
-public class DistanceConstraint extends Constraint {
+public class DistanceConstraint implements Constraint {
     private Particle p1;
     private Particle p2;
     private double distance;
 
     public DistanceConstraint(Particle p1, Particle p2) {
-        super();
         this.p1 = p1;
         this.p2 = p2;
         this.distance = p1.getPosition().distance(p2.getPosition());
@@ -207,7 +205,7 @@ public class DistanceConstraint extends Constraint {
                 b.getY() - normalizedDiff.getY() * correction));
     }
 
-    public void draw(Graphics2D g2d) {
+    public void draw(FXGraphics2D g2d) {
         g2d.draw(new Line2D.Double(p1.getPosition(), p2.getPosition()));
     }
 }
