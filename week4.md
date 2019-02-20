@@ -75,7 +75,6 @@ public class VerletDemo extends Application {
     public void update(double deltaTime) {
         for(Particle p : particles)
             p.update();
-        repaint();
     }
 
     public void draw(FXGraphics2D g2d) {
@@ -83,7 +82,7 @@ public class VerletDemo extends Application {
         g2d.clearRect(0,0, 1920, 1080);
 
         for(Particle p : particles)
-            p.draw(g2d);
+            p.draw(g);
     }
 }
 ```
@@ -244,7 +243,6 @@ Een blob is te modelleren als een centrum met een buitenkant.
 
 ---
 
-# Eindopdracht week 4
 
 {% include week04/exercise/01-Verlet.md %}
 {: .exercises }
