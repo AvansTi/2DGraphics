@@ -50,8 +50,7 @@ world.addBody(ball);
 Door de body nu met een fixture aan de world toe te voegen, kunnen we deze body simuleren. Dit doen we met de update methode. Deze methode wil weten hoeveel tijd er is verstreken sinds de vorige update aanroep, en zal op basis van deze tijd alle objecten verplaatsen en draaien. Om de bal te simuleren, kunnen we de volgende code gebruiken om de positie over een seconde te bekijken:
 
 ```java
-for(int i = 0; i < 10; i++)
-{
+for(int i = 0; i < 10; i++) {
     world.update(0.1);
     System.out.println(ball.getTransform().getTranslation());
 }
@@ -62,24 +61,9 @@ for(int i = 0; i < 10; i++)
 Een physics engine heeft normaal gesproken geen visualisatie. Dit betekent dus dat het systeem gespecialiseerd is in alleen het simuleren, en je het kunt combineren met verschillende manieren van tekenen voor maximale flexibiliteit. Om toch te helpen met de visualisatie van wat er in de physics engine gebeurt, kunnen we gebruik maken van een DebugDraw object. Dit is een eigengemaakt object dat over alle objecten uit de physics engine itereert, en ze hierna met simpele primitieven tekent. Een basis-voorbeeld van een debugdraw met dyn4j staat hieronder. Dit voorbeeld tekent alleen polygonen en cirkels, wat voldoende is voor een simpele scene
 
 ```java
-import org.dyn4j.collision.Fixture;
-import org.dyn4j.dynamics.Body;
-import org.dyn4j.dynamics.World;
-import org.dyn4j.geometry.Circle;
-import org.dyn4j.geometry.Convex;
-import org.dyn4j.geometry.Polygon;
-import org.dyn4j.geometry.Vector2;
-
-import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.GeneralPath;
-
 public class DebugDraw {
-    public static void draw(Graphics2D g2d, World world, double scale) {
-        for(Body b : world.getBodies())
-        {
+    public static void draw(FXGraphics2D g2d, World world, double scale) {
+        for(Body b : world.getBodies()) {
             AffineTransform originalTransform = g2d.getTransform();
 
             AffineTransform bodyTransform = new AffineTransform();
@@ -87,10 +71,8 @@ public class DebugDraw {
             bodyTransform.rotate(b.getTransform().getRotation());
             g2d.transform(bodyTransform);
 
-
             for(Fixture f : b.getFixtures())
                 g2d.draw(AffineTransform.getScaleInstance(scale,scale).createTransformedShape(getShape(f.getShape(), scale)));
-
 
             g2d.setTransform(originalTransform);
         }
@@ -125,7 +107,7 @@ public class DebugDraw {
 }
 ```
 
-Om deze debugdraw nu te gebruiken moeten we een Graphics2D object meegeven, de world die we willen tekenen en een schaal: ```DebugDraw.draw(g2d, world, 100.0);```. Deze schaal is nodig omdat als we de schaal in de Graphics2D.setTransform() meegeven, de lijnen erg dik worden.
+Om deze debugdraw nu te gebruiken moeten we een Graphics2D object meegeven, de world die we willen tekenen en een schaal: `DebugDraw.draw(g2d, world, 100.0);`. Deze schaal is nodig omdat als we de schaal in de `Graphics2D.setTransform()` meegeven, de lijnen erg dik worden.
 
 ## Plaatjes en echt gebruik
 
@@ -144,15 +126,13 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class GameObject
-{
-    Body body;
-    BufferedImage image;
-    Vector2 offset;
-    double scale;
+public class GameObject {
+    private Body body;
+    private BufferedImage image;
+    private Vector2 offset;
+    private double scale;
 
-    GameObject(String imageFile, Body body, Vector2 offset, double scale)
-    {
+    public GameObject(String imageFile, Body body, Vector2 offset, double scale) {
         this.body = body;
         this.offset = offset;
         this.scale = scale;
@@ -163,8 +143,7 @@ public class GameObject
         }
     }
 
-    public void draw(Graphics2D g2d)
-    {
+    public void draw(FXGraphics2D g2d) {
         if(image == null)
             return;
 
@@ -179,6 +158,7 @@ public class GameObject
     }
 }
 ```
+
 We kunnen nu in ons paneel een lijst van gameobjects gaan opslaan, en deze vullen in de constructor van het panel:
 
 ```java
@@ -195,26 +175,15 @@ gameObjects.add(new GameObject("/images/basketball.png", ball, new Vector2(0,0),
 de update wordt dan:
 
 ```java
-private long lastTime;
-public void actionPerformed(ActionEvent e) {
-    long time = System.nanoTime();
-    double elapsedTime = (time-lastTime) / 1000000000.0;
-    lastTime = time;
-
-    world.update(elapsedTime);
-
-    repaint();
+public void update(double deltaTime) {
+    world.update(deltaTime);
 }
 ```
 
-en de paintComponent:
+en de draw:
 
 ```java
-public void paintComponent(Graphics g)
-{
-    super.paintComponent(g);
-    Graphics2D g2d = (Graphics2D) g;
-
+public void draw(FXGraphics2D g2d) {
     for(GameObject gameobject : gameObjects)
         gameobject.draw(g2d);
 }
@@ -224,7 +193,7 @@ Voor een complete demo, zie de Hello_Basketball module in week 5
 
 ## Meer over fixtures
 
-Fixtures bevatten informatie over de vormen van je Bodies. Je kunt verschillende vormen gebruiken om aan het object te koppelen, en deze vormen kun je ook combineren. Deze vormen kun je aanmaken via de statische methoden in de [Geometry](http://docs.dyn4j.org/v3.2.4/org/dyn4j/geometry/Geometry.html) klasse. Een aantal van deze vormen zijn:
+Fixtures bevatten informatie over de vormen van je Bodies. Je kunt verschillende vormen gebruiken om aan het object te koppelen, en deze vormen kun je ook combineren. Deze vormen kun je aanmaken via de statische methoden in de [Geometry](http://docs.dyn4j.org/v3.3.0/org/dyn4j/geometry/Geometry.html) klasse. Een aantal van deze vormen zijn:
 
 - Circle
 - Ellipse
@@ -239,9 +208,9 @@ Deze shapes zijn vanwege efficientie veel specifieker dan in het tekenen met Jav
 
 Daarnaast kun je in een fixture de 'restitution', 'friction' en 'density' instellen.
 
-- Restitution is hoe hard een object stuitert als het tegen een ander object aanbotst. Standaard, als 2 objecten tegen elkaar botsen, zal de restitution van de 2 objecten gecombineerd worden door middel van de max() functie (zie [documentatie](http://docs.dyn4j.org/v3.2.4/org/dyn4j/dynamics/CoefficientMixer.html))
+- Restitution is hoe hard een object stuitert als het tegen een ander object aanbotst. Standaard, als 2 objecten tegen elkaar botsen, zal de restitution van de 2 objecten gecombineerd worden door middel van de `max()` methode (zie [documentatie](http://docs.dyn4j.org/v3.3.0/org/dyn4j/dynamics/CoefficientMixer.html))
 
-- Friction is de wrijving, het afremmen van objecten als ze over elkaar heenschuiven. Standaard zal de wrijving van de 2 objecten gecombineerd worden met de formule ![formula](https://latex.codecogs.com/gif.latex?%5Csqrt%7Bfriction1%20%5Ctimes%20friction2%7D)  [documentatie](http://docs.dyn4j.org/v3.2.4/org/dyn4j/dynamics/CoefficientMixer.html))
+- Friction is de wrijving, het afremmen van objecten als ze over elkaar heenschuiven. Standaard zal de wrijving van de 2 objecten gecombineerd worden met de formule ![formula](https://latex.codecogs.com/gif.latex?%5Csqrt%7Bfriction1%20%5Ctimes%20friction2%7D)  [documentatie](http://docs.dyn4j.org/v3.3.0/org/dyn4j/dynamics/CoefficientMixer.html))
 
 ## Joints
 
@@ -249,46 +218,36 @@ Een Joint is een koppeling tussen verschillende RigidBodies. Door deze koppeling
 
 ### Distance Joint
 
-[![distance](images/week05/distance-joint.png?thumbright)](images/week05/distance-joint.png)De distance joint is een joint om een vaste afstand tussen 2 punten op de bodies vast te houden. Er zijn verder geen beperkingen in rotaties, dus beide objecten kunnen vrij ronddraaien. Let erop dat de locaties van de ankers belangrijk is, deze worden opgegeven in wereldcoördinaten bij het aanmaken van de joint
+[![distance](images/week05/distance-joint.png?thumbright)](images/week05/distance-joint.png)] De distance joint is een joint om een vaste afstand tussen 2 punten op de bodies vast te houden. Er zijn verder geen beperkingen in rotaties, dus beide objecten kunnen vrij ronddraaien. Let erop dat de locaties van de ankers belangrijk is, deze worden opgegeven in wereldcoördinaten bij het aanmaken van de joint
 
 ### Revolute Joint
 
-[![revolute](images/week05/revolute-joint.png?thumbright)](images/week05/revolute-joint.png)Een revolute joint is een joint die alleen kan draaien, maar waarbij geen beweging mogelijk is. Er wordt 1 punt opgegeven, het draaipunt, waar de objecten aan elkaar verankert worden. Deze joint is bijvoorbeeld te gebruiken voor slingers of wielen. Het is ook mogelijk een motor op deze joint te zetten, om de objecten automatisch rond te laten draaien
+[![revolute](images/week05/revolute-joint.png?thumbright)](images/week05/revolute-joint.png)] Een revolute joint is een joint die alleen kan draaien, maar waarbij geen beweging mogelijk is. Er wordt 1 punt opgegeven, het draaipunt, waar de objecten aan elkaar verankert worden. Deze joint is bijvoorbeeld te gebruiken voor slingers of wielen. Het is ook mogelijk een motor op deze joint te zetten, om de objecten automatisch rond te laten draaien
 
 ### Weld Joint
 
-[![weld](images/week05/weld-joint.png?thumbright)](images/week05/weld-joint.png)Een weld joint maakt 2 objecten aan elkaar vast, zonder flexibiliteit. Een weld joint is nog wel 'soft', dus bij veel kracht kan een weld joint wel gesplitst worden met grote krachten, maar deze zal wel terug naar elkaar trekken.
+[![weld](images/week05/weld-joint.png?thumbright)](images/week05/weld-joint.png)] Een weld joint maakt 2 objecten aan elkaar vast, zonder flexibiliteit. Een weld joint is nog wel 'soft', dus bij veel kracht kan een weld joint wel gesplitst worden met grote krachten, maar deze zal wel terug naar elkaar trekken.
 
 ### Prismatic Joint
-[![weld](images/week05/prismatic-joint.png?thumbright)](images/week05/prismatic-joint.png)Een prismatic joint maakt 2 objecten aan elkaar vasts, waarbij de afstand tussen de 2 kan variëren, maar niet de hoek. Je kunt het dus zien alsof de objecten met een soort rails aan elkaar vast zitten. Het is ook mogelijk met een motor deze joint te zetten, deze zal de objecten dan lineair voortbewegen
+
+[![weld](images/week05/prismatic-joint.png?thumbright)](images/week05/prismatic-joint.png)] Een prismatic joint maakt 2 objecten aan elkaar vasts, waarbij de afstand tussen de 2 kan variëren, maar niet de hoek. Je kunt het dus zien alsof de objecten met een soort rails aan elkaar vast zitten. Het is ook mogelijk met een motor deze joint te zetten, deze zal de objecten dan lineair voortbewegen
 
 ## Raycasting en collision testing
 
 ![raycasting](images/week05/raycasting-input.png)
 
-Het is mogelijk in de wereld te testen of objecten geraakt worden door een ray, die noemen we raycasting. Het world object heeft een aantal [```raycast()```](http://docs.dyn4j.org/v3.2.4/org/dyn4j/dynamics/World.html#raycast-org.dyn4j.geometry.Ray-org.dyn4j.dynamics.Body-double-boolean-org.dyn4j.dynamics.RaycastResult-) methoden waarmee de wereld bekeken kan worden. Dit kan handig zijn voor bijvoorbeeld het schieten van een geweer of laser, om te bepalen wat er geraakt wordt.
+Het is mogelijk in de wereld te testen of objecten geraakt worden door een ray, die noemen we raycasting. Het world object heeft een aantal [`raycast()`](http://docs.dyn4j.org/v3.3.0/org/dyn4j/dynamics/World.html#raycast-org.dyn4j.geometry.Ray-org.dyn4j.dynamics.Body-double-boolean-org.dyn4j.dynamics.RaycastResult-) methoden waarmee de wereld bekeken kan worden. Dit kan handig zijn voor bijvoorbeeld het schieten van een geweer of laser, om te bepalen wat er geraakt wordt.
 
-Voor collision detection kunnen verschillende mechanismen gebruikt worden. Het is makkelijk om op te vragen welke bodies in contact zijn. Met de (```RigidBody.getInContactBodies()```)[http://docs.dyn4j.org/v3.2.4/org/dyn4j/dynamics/Body.html#getInContactBodies-boolean-] methode is op te vragen welke bodies in contact zijn met deze body, en dus een collision hebben.
+Voor collision detection kunnen verschillende mechanismen gebruikt worden. Het is makkelijk om op te vragen welke bodies in contact zijn. Met de [`RigidBody.getInContactBodies()`](http://docs.dyn4j.org/v3.3.0/org/dyn4j/dynamics/Body.html#getInContactBodies-boolean-) methode is op te vragen welke bodies in contact zijn met deze body, en dus een collision hebben.
 
 ## Beïnvloeden van objecten
 
-In een normale game worden objecten meestal beïnvloed door de positie aan te passen. In een physics engine is dit niet altijd een goed idee, omdat dan alle interne krachten op een body opgeheft worden. Als je een object, zoals een speler, wil verschuiven is het beter om een kracht op dit object uit te oefenen. Deze kracht kun je toevoegen met de ```applyForce``` methode, waarbij optioneel een punt meegegeven kan worden, waar de kracht toegepast wordt. Om het object rond te laten draaien is de ```applyImpulse()``` te gebruiken.
+In een normale game worden objecten meestal beïnvloed door de positie aan te passen. In een physics engine is dit niet altijd een goed idee, omdat dan alle interne krachten op een body opgeheft worden. Als je een object, zoals een speler, wil verschuiven is het beter om een kracht op dit object uit te oefenen. Deze kracht kun je toevoegen met de `applyForce` methode, waarbij optioneel een punt meegegeven kan worden, waar de kracht toegepast wordt. Om het object rond te laten draaien is de `applyImpulse()` te gebruiken.
 
 ## Gebruik - Het slepen van een object met je muis
 
 
-## Eindopdracht week 2
-
-1. Maak angry birds
-    - Maak een wereld met aan de rechterkant een aantal blokken
-    - Zet aan de linkerkant een katapult die objecten kan schieten
-    - Om de katapult te besturensleep je het object in de katapult naar links, en als je deze loslaat schiet deze naar rechts
-        - Dit kan lastig zijn, je zou ook de input doen door middel van 2 inputboxen, de force  en de hoek waaronder je schiet
-    - ***uitdaging*** Zodra een blok hard geraakt wordt, verdwijnt het. Zodra alle blokken weg zijn heb je 't spel gewonnen
-
-
-{% include week02/exercise/06-blockdrag.md %}
+{% include week05/exercise/01-angry-birds.md %}
 {: .exercises }
-
 
 Einde van week 5
