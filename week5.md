@@ -246,6 +246,54 @@ In een normale game worden objecten meestal beïnvloed door de positie aan te pa
 
 ## Gebruik - Het slepen van een object met je muis
 
+Om objecten dynamisch te kunnen slepen, kunnen we niet zomaar de positie van objecten of bodies aanpassen. Als we dit zouden doen, worden de krachten op het object niet goed doorberekend, waardoor het object niet goed meer reageert op andere objecten. De collision zal dan ook genegeerd worden. In plaats daarvan, kunnen we beter een nieuw object aanmaken, en een joint tussen het te slepen object en het onzichtbare, versleepte object.
+
+Het eerste deel:
+
+```java
+    Convex convex = Geometry.createCircle(0.1);
+    Transform tx = new Transform();
+    tx.translate(localMouse.getX(), localMouse.getY());
+
+    // detect bodies under the mouse pointer
+    List<DetectResult> results = new ArrayList<>();
+
+    boolean detect = world.detect(
+            convex,
+            tx,
+            null,      // no, don't filter anything using the Filters
+            false,      // include sensor fixtures
+            false,      // include inactive bodies
+            false,      // we don't need collision info
+            results);
+
+    if (detect) {
+        Body target = results.get(0).getBody();
+        ...
+    }
+```
+
+Hiermee kunnen we detecteren of er een object onder de muis zit. Hierna kunnen we een nieuw object aanmaken op de positie van de muis, en een koppeling maken
+
+```java
+body = new Body();
+body.setMass(MassType.INFINITE);
+body.addFixture(convex);
+body.getTransform().setTranslation(localMouse.getX(), localMouse.getY());
+world.addBody(body);
+
+joint = new MotorJoint(target, body);
+joint.setCollisionAllowed(false);
+joint.setMaximumForce(1000.0);
+joint.setMaximumTorque(0.01);
+
+world.addJoint(joint);
+```
+
+Hier wordt een motor joint gebruikt om de objecten ook recht te houden. In het MouseDragged-event kan dit nieuwe body-object dan verplaatst worden, en het geselecteerde object zal dan proberen mee te bewegen (maar nog wel achter andere objecten blijven hangen)
+
+
+
 
 {% include week05/exercise/01-angry-birds.md %}
 {: .exercises }
