@@ -218,19 +218,19 @@ Een Joint is een koppeling tussen verschillende RigidBodies. Door deze koppeling
 
 ### Distance Joint
 
-[![distance](images/week05/distance-joint.png?thumbright)](images/week05/distance-joint.png)] De distance joint is een joint om een vaste afstand tussen 2 punten op de bodies vast te houden. Er zijn verder geen beperkingen in rotaties, dus beide objecten kunnen vrij ronddraaien. Let erop dat de locaties van de ankers belangrijk is, deze worden opgegeven in wereldcoördinaten bij het aanmaken van de joint
+[![distance](images/week05/distance-joint.png?thumbright)](images/week05/distance-joint.png) De distance joint is een joint om een vaste afstand tussen 2 punten op de bodies vast te houden. Er zijn verder geen beperkingen in rotaties, dus beide objecten kunnen vrij ronddraaien. Let erop dat de locaties van de ankers belangrijk is, deze worden opgegeven in wereldcoördinaten bij het aanmaken van de joint
 
 ### Revolute Joint
 
-[![revolute](images/week05/revolute-joint.png?thumbright)](images/week05/revolute-joint.png)] Een revolute joint is een joint die alleen kan draaien, maar waarbij geen beweging mogelijk is. Er wordt 1 punt opgegeven, het draaipunt, waar de objecten aan elkaar verankert worden. Deze joint is bijvoorbeeld te gebruiken voor slingers of wielen. Het is ook mogelijk een motor op deze joint te zetten, om de objecten automatisch rond te laten draaien
+[![revolute](images/week05/revolute-joint.png?thumbright)](images/week05/revolute-joint.png) Een revolute joint is een joint die alleen kan draaien, maar waarbij geen beweging mogelijk is. Er wordt 1 punt opgegeven, het draaipunt, waar de objecten aan elkaar verankert worden. Deze joint is bijvoorbeeld te gebruiken voor slingers of wielen. Het is ook mogelijk een motor op deze joint te zetten, om de objecten automatisch rond te laten draaien
 
 ### Weld Joint
 
-[![weld](images/week05/weld-joint.png?thumbright)](images/week05/weld-joint.png)] Een weld joint maakt 2 objecten aan elkaar vast, zonder flexibiliteit. Een weld joint is nog wel 'soft', dus bij veel kracht kan een weld joint wel gesplitst worden met grote krachten, maar deze zal wel terug naar elkaar trekken.
+[![weld](images/week05/weld-joint.png?thumbright)](images/week05/weld-joint.png) Een weld joint maakt 2 objecten aan elkaar vast, zonder flexibiliteit. Een weld joint is nog wel 'soft', dus bij veel kracht kan een weld joint wel gesplitst worden met grote krachten, maar deze zal wel terug naar elkaar trekken.
 
 ### Prismatic Joint
 
-[![weld](images/week05/prismatic-joint.png?thumbright)](images/week05/prismatic-joint.png)] Een prismatic joint maakt 2 objecten aan elkaar vasts, waarbij de afstand tussen de 2 kan variëren, maar niet de hoek. Je kunt het dus zien alsof de objecten met een soort rails aan elkaar vast zitten. Het is ook mogelijk met een motor deze joint te zetten, deze zal de objecten dan lineair voortbewegen
+[![weld](images/week05/prismatic-joint.png?thumbright)](images/week05/prismatic-joint.png) Een prismatic joint maakt 2 objecten aan elkaar vasts, waarbij de afstand tussen de 2 kan variëren, maar niet de hoek. Je kunt het dus zien alsof de objecten met een soort rails aan elkaar vast zitten. Het is ook mogelijk met een motor deze joint te zetten, deze zal de objecten dan lineair voortbewegen
 
 ## Raycasting en collision testing
 
