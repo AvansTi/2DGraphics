@@ -55,6 +55,16 @@ Implementeer een applicatie waar een (grote) tekst in staat. Deze tekst moet voo
 
 ## Categorie 2 - Gemiddelde moelijkheid (cijfer richtlijn 7-8.5)
 
+### Planeten systeem
+
+Maak een applicatie waarin je het zonnestelsel simuleert. Simuleer hierbij het ronddraaien van de planeten om de zon, en de manen om de planeten
+
+#### Requirements:
+
+- Gescheiden update/draw code
+- Gebruik van afbeeldingen of verschillende gekleurde shapes voor het tekenen van de planeten en manen
+- Relatieve transformaties voor het positioneren en ronddraaien van planeten en manen om elkaar
+
 ### Particle Simulatie
 
 [![particles](eindopdracht/particles.jpg?thumbright)](eindopdracht/particles.jpg)Implementeer een applicatie waarin je explosies, rook en andere zaken kunt visualiseren door middel van particles. Voor verschillende mogelijkheden van particles, zie [youtube](https://www.youtube.com/watch?v=heW3vn1hP2E)
@@ -109,7 +119,33 @@ Voor inspiratie:
   - Restitution
   - Friction
 
+### Boebot simulator
+
+Maak een applicatie om het rijgedrag van een boebot te simuleren, in een bovenaanzicht. Implementeer de 2 wielen die je los kunt aansturen, ultrasoon sensor, en eventueel lijnvolgers
+
+#### Requirements:
+- Gescheiden update/draw code
+- Maakt gebruik van 2 motoren voor het aansturen en bewegen van de boebot
+- Maakt gebruik van afbeeldingen voor het tekenen van de boebot
+- Heeft een omgeving waar de boebot doorheen rijdt
+- Heeft een ultrasoon sensor (afstand voor de boebot berekenen)
+
 ## Categorie 3 - Moeilijk (8.5+)
+
+### 2D licht en vision simulatie
+
+Schrijf een systeem waarin een 2D line of sight algoritme geimplementeerd is. Voor een voorbeeld, zie [https://www.redblobgames.com/articles/visibility/](redblobgames).
+
+#### Requirements
+- Gescheiden update/draw code
+- algoritme die de zichtbaarheid van een wereld visualiseert vanuit een punt
+- dynamisch te bewegen punt vanuit waar de wereld gevisualiseerd wordt
+
+#### Requirements:
+
+- Gescheiden update/draw code
+- Gebruik van afbeeldingen of verschillende gekleurde shapes voor het tekenen van de planeten en manen
+- Relatieve transformaties voor het positioneren en ronddraaien van planeten en manen om elkaar
 
 ### 2D Physics game
 
