@@ -81,7 +81,7 @@ class Pipe
 }
 ```
 
-Maar deze 2 cöordinaten kunnen ook in een Point2D opgeslagen worden. De x-waarde stelt dan de positie horizontaal voor, en de y-waarde stelt de hoogte van 't gat voor. Er kunnen meerdere buizen tegelijk op het scherm komen, dus deze worden in een ArrayList opgeslagen. Door een teller bij te houden kan na een bepaalde tijd een nieuwe buis toegevoegd worden. Deze buizen kunnen we hierna tekenen in de paintComponent, door de positie te berekenen
+Maar deze 2 cöordinaten kunnen ook in een Point2D opgeslagen worden. De x-waarde stelt dan de positie horizontaal voor, en de y-waarde stelt de hoogte van 't gat voor. Er kunnen meerdere buizen tegelijk op het scherm komen, dus deze worden in een ArrayList opgeslagen. Door een teller bij te houden kan na een bepaalde tijd een nieuwe buis toegevoegd worden. Deze buizen kunnen we hierna tekenen in de draw methode, door de positie te berekenen.
 
 ```java
 private ArrayList<Point2D> pipes = new ArrayList<>();
@@ -125,6 +125,52 @@ De afbeeldingen van de pijpen worden nu boven en onder de opgegeven posities get
 
 ## Collision
 
+Bij het updaten van de pijpen kunnen we ook de collision berekenen met de speler. We kunnen kijken of de sprite van de speler tussen de zijkanten van de buis loopt. Als dit zo is, kunnen we kijken naar de Y-positie van de speler, en als deze buiten het gat valt (birdHeight vergelijken met pipe.getY() - gapSize), kunnen we detecteren dat de speler de buizen aanraakt.
+
+```java
+for(Point2D pipe : pipes)
+{
+    pipe.setLocation(pipe.getX()-4, pipe.getY());
+
+    if(pipe.getX() < 50 + bird.getWidth()*2 && pipe.getX() > 50 - pipeUp.getWidth()*2)
+    {
+        if(birdHeight < pipe.getY() - gapSize ||
+                birdHeight > pipe.getY() + gapSize)
+        {
+            reset();
+            break;
+        }
+    }
+}
+```
+
+## Score
+
+Om nu de score te op te hogen, en de pijpen ook weer uit het geheugen te halen als ze uit het scherm gaan, kunnen we kijken wanneer de X-positie van de pijp links buiten het scherm komt. We kunnen alleen in een for-each lus geen elementen weghalen, dus we moeten deze lus omschrijven naar een lus met een iterator
+
+```java
+Iterator<Point2D> iterator = pipes.iterator();
+while(iterator.hasNext())
+{
+    Point2D pipe = iterator.next();
+    pipe.setLocation(pipe.getX()-4, pipe.getY());
+
+    if(pipe.getX() < 50 + bird.getWidth()*2 && pipe.getX() > 50 - pipeUp.getWidth()*2)
+    {
+        if(birdHeight < pipe.getY() - gapSize ||
+                birdHeight > pipe.getY() + gapSize)
+        {
+            reset();
+            break;
+        }
+    }
+
+    if(pipe.getX() < -2*pipeUp.getWidth()) {
+        iterator.remove();
+        score++;
+    }
+}
+```
 
 ---
 
