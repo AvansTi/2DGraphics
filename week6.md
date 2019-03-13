@@ -33,20 +33,16 @@ Deze objecten kunnen in attributen opgeslagen worden om in de paintComponent met
 ```java
 private float backgroundScroll = 0;
 
-public void paintComponent(Graphics g)
+public void draw(FXGraphics2D g2d)
 {
-    super.paintComponent(g);
-    Graphics2D g2d = (Graphics2D)g;
-
     double ratio = getHeight() / (double)getWidth();
     g2d.setPaint(new TexturePaint(background, new Rectangle2D.Double(-backgroundScroll,0,getWidth()*ratio, getHeight())));
     g2d.fill(new Rectangle2D.Double(0,0,getWidth(), getHeight()));
 }
 
-public void actionPerformed()
+public void update(double deltaTime )
 {
     backgroundScroll += 2;
-    repaint();
 }
 ```
 
@@ -93,7 +89,7 @@ private double pipeCounter = 0;
 private final double gapSize = 100;
 
 
-public void actionPerformed(ActionEvent e)
+public void update(double elapsedTime)
 {
     pipeCounter--;
     if(pipeCounter < 0)
@@ -108,10 +104,8 @@ public void actionPerformed(ActionEvent e)
     }
 }
 
-public void paintComponent(Graphics g)
+public void draw(FXGraphics2D g2d)
 {
-    Graphics2D g2d = (Graphics2D)g;
-
     for(Point2D pipe : pipes)
     {
         AffineTransform pipeTransform = new AffineTransform();
@@ -134,4 +128,4 @@ De afbeeldingen van de pijpen worden nu boven en onder de opgegeven posities get
 
 ---
 
-Einde van week 7
+Einde van week 6
