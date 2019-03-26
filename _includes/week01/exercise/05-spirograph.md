@@ -11,8 +11,8 @@
 >> Voor het tekenen van de spirograaf kun je gebruik maken van de generieke formules
 >>
 >> ```math
->> x = a × cos(b × ø) + c × cos(d × ø)
->> y = a × sin(b × ø) + c × sin(d × ø)
+>> x = a × cos(b × φ) + c × cos(d × φ)
+>> y = a × sin(b × φ) + c × sin(d × φ)
 >> ```
 >>
 >> Dit zijn versimpelde formules, op wikipedia staan net iets andere formules, deze kun je ook gebruiken maar zijn iets complexer om te implementeren, maar wel gemakkelijker te configureren. Door de variabelen a,b,c en d aan te passen kun je een andere figuur te maken.
