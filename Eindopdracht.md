@@ -3,29 +3,22 @@
 De module 2D graphics wordt beoordeeld met de bespreking van een individueel gemaakte eindopdracht. In lesweek 6/7 worden de individuele opdrachten uitgereikt, de besprekingen vinden plaats in lesweek 8/9. In de tussentijd is er voor iedereen de gelegenheid de individuele opdracht uit te werken.
 De individuele opdrachten zijn gecategoriseerd in moeilijkheid en/of complexiteit. De student mag zelf kiezen uit welke categorie een opdracht wordt gekozen. Wel is het zo dat een opdracht van een lagere complexiteit natuurlijk een minder hoog cijfer biedt. Dit maakt het mogelijk dat iedereen een opdracht op zijn/haar niveau kan kiezen en deze module met succes kan afronden. **Daarnaast worden de gemaakte opgaven meegenomen in de beoordeling**
 
-<!-- TOC -->
-
 - [Eindopdracht](#eindopdracht)
     - [Categorie 1 - Makkelijke opgave (cijfer richtlijn 6-7)](#categorie-1---makkelijke-opgave-cijfer-richtlijn-6-7)
         - [Geanimeerde tekst](#geanimeerde-tekst)
-            - [Requirements:](#requirements)
         - [Robotarm](#robotarm)
-            - [Requirements:](#requirements-1)
     - [Categorie 2 - Gemiddelde moelijkheid (cijfer richtlijn 7-8.5)](#categorie-2---gemiddelde-moelijkheid-cijfer-richtlijn-7-85)
+        - [Planeten systeem](#planeten-systeem)
         - [Particle Simulatie](#particle-simulatie)
-            - [Requirements:](#requirements-2)
         - [Fractals](#fractals)
-            - [Requirements:](#requirements-3)
         - [2D physics sandbox](#2d-physics-sandbox)
-            - [Requirements:](#requirements-4)
+        - [Boebot simulator](#boebot-simulator)
     - [Categorie 3 - Moeilijk (8.5+)](#categorie-3---moeilijk-85)
+        - [2D licht en vision simulatie](#2d-licht-en-vision-simulatie)
         - [2D Physics game](#2d-physics-game)
-            - [Requirements:](#requirements-5)
         - [Particle Flow](#particle-flow)
-            - [Requirements:](#requirements-6)
         - [Vrije opdracht](#vrije-opdracht)
 
-<!-- /TOC -->
 
 ## Categorie 1 - Makkelijke opgave (cijfer richtlijn 6-7)
 
@@ -140,12 +133,6 @@ Schrijf een systeem waarin een 2D line of sight algoritme geimplementeerd is. Vo
 - Gescheiden update/draw code
 - algoritme die de zichtbaarheid van een wereld visualiseert vanuit een punt
 - dynamisch te bewegen punt vanuit waar de wereld gevisualiseerd wordt
-
-#### Requirements:
-
-- Gescheiden update/draw code
-- Gebruik van afbeeldingen of verschillende gekleurde shapes voor het tekenen van de planeten en manen
-- Relatieve transformaties voor het positioneren en ronddraaien van planeten en manen om elkaar
 
 ### 2D Physics game
 
