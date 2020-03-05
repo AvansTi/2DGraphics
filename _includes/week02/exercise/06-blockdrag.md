@@ -6,6 +6,6 @@
 >>
 >> **Uitdaging:** Voeg een camerasysteem toe. Door met de rechtermuisknop te slepen kun je het complete scherm verslepen, met het scrollwieltje kun je de camera inzoomen en uitzoomen, en met de linker muisknop kun je een blok verslepen. Daarnaast moet het slepen natuurlijk ook werken als de camera verschoven of ingezoomed is. Let erop dat het 't gemakkelijkst is om de camerapositie en zoom los op te slaan, en iedere keer dat getekend wordt de cameraAffineTransform te berekenen.
 >>
->> [![Block Dragger](images/week02/blocks.gif)](images/week02/blocks2.gif)
+>> [![Block Dragger](images/week02/blocks.gif)](images/week02/blocks.gif)
 >>
 >{: .exercise}
