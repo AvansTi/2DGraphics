@@ -127,7 +127,7 @@ Maak een applicatie om het rijgedrag van een boebot te simuleren, in een bovenaa
 
 ### 2D licht en vision simulatie
 
-Schrijf een systeem waarin een 2D line of sight algoritme geimplementeerd is. Voor een voorbeeld, zie [https://www.redblobgames.com/articles/visibility/](redblobgames).
+Schrijf een systeem waarin een 2D line of sight algoritme geimplementeerd is. Voor een voorbeeld, zie [redblobgames](https://www.redblobgames.com/articles/visibility/).
 
 #### Requirements
 - Gescheiden update/draw code
